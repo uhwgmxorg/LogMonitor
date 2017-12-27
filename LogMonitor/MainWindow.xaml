@@ -1,0 +1,46 @@
+﻿<Controls:MetroWindow x:Class="LogMonitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:tools="clr-namespace:LogMonitor.Tools"
+        xmlns:local="clr-namespace:LogMonitor"        
+        xmlns:controls="clr-namespace:ControlPanels;assembly=ControlPanels"
+        Icon="/LogMonitor;component/Resources/LogMon.ico"
+        mc:Ignorable="d"
+        tools:WindowsSettings.Save="True" 
+        Title="LogMonitor" Height="450" Width="850" Closing="MetroWindow_Closing" Loaded="MetroWindow_Loaded">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid>
+        <Button Content="Add" ToolTip="Add a new Log Panel" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0" Margin="10,10,0,0" Click="Button_Click_Add" HorizontalAlignment="Left" Width="85" Height="26" VerticalAlignment="Top"/>
+        <Button Content="Remove" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0" Margin="100,10,0,0" Click="Button_Click_Remove" HorizontalAlignment="Left" Width="85" Height="26" VerticalAlignment="Top">
+            <Button.ToolTip>
+                <StackPanel>
+                    <TextBlock>
+                        Removes the last added Panel
+                    <LineBreak />
+                        press the left mouse button to select a particular panel 
+                    </TextBlock>
+                </StackPanel>
+            </Button.ToolTip>
+            <Button.ContextMenu>
+                <ContextMenu ItemsSource="{Binding Path=ContextMenuItemList}" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0">
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <Button Content="About"  ToolTip="About LogMonitor" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0"  Margin="0,10,10,0" Click="Button_Click_About" HorizontalAlignment="Right" Width="85" Height="26" VerticalAlignment="Top"/>
+        <Grid Background="#FF959595" Margin="0,41,0,0">
+            <controls:DragDockPanelHost 
+                    x:Name="DragDockPanelHostWithItemTemplate" 
+                    Margin="0,0,0,0" >
+                <controls:DragDockPanelHost.ItemTemplate>
+                    <DataTemplate>
+                        <controls:DragDockPanel Header="{Binding DisplayName}" Content="{Binding View}"/>
+                    </DataTemplate>
+                </controls:DragDockPanelHost.ItemTemplate>
+            </controls:DragDockPanelHost>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

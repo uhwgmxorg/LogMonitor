@@ -1,0 +1,42 @@
+﻿<mahapps:MetroWindow x:Class="WpfFileDialogs.OpenFileDlgWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfFileDialogs"
+        xmlns:mahapps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="Open File Dlg Window" Height="330" Width="450" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing" Closed="MetroWindow_Closed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="10,10,10,75">
+            <TreeView x:Name="fileSystemTreeView" local:LazyTreeViewExtension.IsLazyLoading="True" SelectedItemChanged="FileSystemTreeView_SelectedItemChanged" >
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource ="{Binding Path=SubItems}">
+                        <TextBlock Text="{Binding Path=ShortName}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Grid>
+        <ComboBox SelectedItem="{Binding SelectedFile}" ItemsSource="{Binding FileList}" ToolTip="{Binding LongFileNameToolTip}" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0" IsReadOnly="True" Margin="10,0,170,41" Height="29" VerticalAlignment="Bottom" SelectionChanged="ComboBox_SelectionChangedFiles">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding SchortName}" ToolTip="{Binding LongName}" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Content="Clear" HorizontalAlignment="Right" Margin="0,0,90,42" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Clear"/>
+        <Button Content="Refresh" HorizontalAlignment="Right" Margin="0,0,10,42" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Refresh"/>
+        <Button Content="Cancel" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Cancel"/>
+        <Button Content="Ok" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Ok"/>
+        <ComboBox SelectedItem="{Binding SelectedFilter}"  ItemsSource="{Binding FilterList}" SelectedIndex="0" IsReadOnly="True" Margin="10,0,170,10"  VerticalAlignment="Bottom" SelectionChanged="ComboBox_SelectionChangedFilter" >
+        </ComboBox>
+    </Grid>
+</mahapps:MetroWindow>
