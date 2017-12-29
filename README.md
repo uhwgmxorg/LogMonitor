@@ -7,6 +7,6 @@ It doesn't have many functions yet and is actually more than a show case, but it
 
 ![img](https://github.com/uhwgmxorg/ComMonitor/blob/master/Doc/logmon014.jpg)
 
-You can find its Homepage [here](http://http://uhwgmxorg.com/LogMonitor/)
+You can find its Homepage [here](http://uhwgmxorg.com/LogMonitor/)
 
 A **Setup** is also available [here](http://uhwgmxorg.com/Setup_LogMonitor_1_3_0_0.zip?dl=0) NOTE: Both the ComMonitor.exe and the Setup*.exe is not signed.
