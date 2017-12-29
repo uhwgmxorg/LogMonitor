@@ -10,28 +10,38 @@
         Icon="/LogMonitor;component/Resources/LogMon.ico"
         mc:Ignorable="d"
         tools:WindowsSettings.Save="True" 
-        Title="LogMonitor" Height="450" Width="850" Closing="MetroWindow_Closing" Loaded="MetroWindow_Loaded">
+        Title="LogMonitor"  MinHeight="450" MinWidth="850" Closing="MetroWindow_Closing" Loaded="MetroWindow_Loaded">
     <Window.Resources>
     </Window.Resources>
     <Grid>
-        <Button Content="Add" ToolTip="Add a new Log Panel" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0" Margin="10,10,0,0" Click="Button_Click_Add" HorizontalAlignment="Left" Width="85" Height="26" VerticalAlignment="Top"/>
-        <Button Content="Remove" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0" Margin="100,10,0,0" Click="Button_Click_Remove" HorizontalAlignment="Left" Width="85" Height="26" VerticalAlignment="Top">
-            <Button.ToolTip>
-                <StackPanel>
-                    <TextBlock>
-                        Removes the last added Panel
-                    <LineBreak />
-                        press the left mouse button to select a particular panel 
-                    </TextBlock>
-                </StackPanel>
-            </Button.ToolTip>
-            <Button.ContextMenu>
-                <ContextMenu ItemsSource="{Binding Path=ContextMenuItemList}" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0">
+        <Grid Height="48" VerticalAlignment="Top" Background="Black">
+            <Grid.ContextMenu>
+                <ContextMenu ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0">
+                    <MenuItem Header="Change Log" Click="ContextMenuItemChangeLog_Click" />
+                    <MenuItem Header="List Of Known Bugs" Click="ContextMenuItemLOKB_Click" />
+                    <Separator/>
+                    <MenuItem Header="Look For Updates" Click="ContextMenuItemLookForUpdates_Click" />
                 </ContextMenu>
-            </Button.ContextMenu>
-        </Button>
-        <Button Content="About"  ToolTip="About LogMonitor" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0"  Margin="0,10,10,0" Click="Button_Click_About" HorizontalAlignment="Right" Width="85" Height="26" VerticalAlignment="Top"/>
-        <Grid Background="#FF959595" Margin="0,41,0,0">
+            </Grid.ContextMenu>
+            <Button Content="Add" ToolTip="Add a new Log Panel" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0" Margin="10,10,0,0" Click="Button_Click_Add" HorizontalAlignment="Left" Width="85" Height="26" VerticalAlignment="Top"/>
+            <Button Content="Remove" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0" Margin="100,10,0,0" Click="Button_Click_Remove" HorizontalAlignment="Left" Width="85" Height="26" VerticalAlignment="Top">
+                <Button.ToolTip>
+                    <StackPanel>
+                        <TextBlock>
+                    Removes the last added Panel
+                <LineBreak />
+                    press the left mouse button to select a particular panel
+                        </TextBlock>
+                    </StackPanel>
+                </Button.ToolTip>
+                <Button.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding Path=ContextMenuItemList}" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0">
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            <Button Content="About"  ToolTip="About LogMonitor" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0"  Margin="0,10,10,0" Click="Button_Click_About" HorizontalAlignment="Right" Width="85" Height="26" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Margin="0,48,0,0">
             <controls:DragDockPanelHost 
                     x:Name="DragDockPanelHostWithItemTemplate" 
                     Margin="0,0,0,0" >

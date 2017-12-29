@@ -1,0 +1,18 @@
+﻿<dialogs:CustomDialog x:Class="LogMonitor.Dialogs.UCListOfKnownBugs"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      Height="300"
+                      Width="710"
+                      mc:Ignorable="d">
+    <Grid>
+        <Label Content="List Of Known Bugs" HorizontalContentAlignment="Center" Margin="0,0,0,261.508" />
+        <ScrollViewer Margin="0,33.492,0,43">
+            <TextBlock Name="ListOfKnownBugs" Width="355"  />
+        </ScrollViewer>
+        <Button Name="Close_Button" Content="Ok" HorizontalAlignment="Left" Margin="141,252,0,0" VerticalAlignment="Top" Width="75"/>
+    </Grid>
+</dialogs:CustomDialog>

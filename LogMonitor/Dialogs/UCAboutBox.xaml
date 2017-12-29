@@ -5,12 +5,65 @@
                       xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      Height="150"
-                      Width="160"
+                      Height="264"
+                      Width="225"
                       mc:Ignorable="d">
-    <Grid Margin="-40.036,-9.509,-40.036,0" >
-        <Label Content="About LogMonitor" Margin="24.985,16.497,20.509,106.51" />
-        <Image HorizontalAlignment="Left" x:Name="image2" Stretch="Fill"  Source="/LogMonitor;component/Resources/LogMon.bmp" VerticalAlignment="Top" Height="32" Margin="62.055,52.508,0,0" Width="32" />
-        <Button Name="Close_Button" Content="Close" Margin="15.494,0,0,17.495" Click="Button_Click" HorizontalAlignment="Left" Width="132" Height="31" VerticalAlignment="Bottom"/>
+    <Grid Margin="0,0,0,0">
+        <Label Content="About LogMonitor" Margin="0,16,0,179" />
+        <Image HorizontalAlignment="Left" x:Name="image2" Stretch="Fill"  Source="/LogMonitor;component/Resources/LogMon.bmp" VerticalAlignment="Top" Height="32" Margin="41,52,0,0" Width="32" />
+        <TextBlock Name="Version" TextWrapping="WrapWithOverflow" Margin="18,94,0,93"/>
+        <Label VerticalAlignment="Top" Margin="18,141.343,10,0" FontSize="12" FontWeight="Bold" FontFamily="Comic Sans MS" Height="25.657" MouseDown="Label_LogMonitorMouseDown" Cursor="Hand" Foreground="#FFFFFFFF">
+            <TextBlock Text="LogMonitor" TextDecorations="Underline" />
+        </Label>
+        <Label VerticalAlignment="Top" Margin="18,166,10,0" FontSize="12" FontWeight="Bold" FontFamily="Comic Sans MS" Height="26" MouseDown="Label_ChangeLogMouseDown" Cursor="Hand" Foreground="#FFFFFFFF">
+            <TextBlock Text="ChangeLog" TextDecorations="Underline" />
+        </Label>
+        <Button Name="Close_Button" Content="Close" Margin="0,0,0,17" Click="Button_Click" HorizontalAlignment="Left" Width="112" Height="31" VerticalAlignment="Bottom"/>
+
+        <Grid Margin="182,-10,-355,0" Background="Black">
+            <Viewport3D ClipToBounds="True" Width="Auto" Height="Auto">
+                <Viewport3D.Triggers>
+                    <EventTrigger RoutedEvent="Viewport3D.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="Translation" Storyboard.TargetProperty="OffsetY" To="10" Duration="0:1:0" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Viewport3D.Triggers>
+                <Viewport3D.Camera>
+                    <PerspectiveCamera FarPlaneDistance="100" NearPlaneDistance="1" FieldOfView="30" LookDirection="0,25,-13" UpDirection="0,1,0" Position="0,2,1.5" />
+                </Viewport3D.Camera>
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <Model3DGroup>
+                            <Model3DGroup.Children>
+                                <AmbientLight Color="#FF808080" />
+                                <GeometryModel3D>
+                                    <GeometryModel3D.Transform>
+                                        <TranslateTransform3D x:Name="Translation" OffsetY="3" />
+                                    </GeometryModel3D.Transform>
+                                    <GeometryModel3D.Geometry>
+                                        <MeshGeometry3D Positions="-1,-2,0 1,-2,0 1,1,0 -1,1,0" TriangleIndices="0 1 2  0 2 3" TextureCoordinates="0,1 1,1 1,0 0,0" Normals="0,0,1 0,0,1" />
+                                    </GeometryModel3D.Geometry>
+                                    <GeometryModel3D.Material>
+                                        <DiffuseMaterial>
+                                            <DiffuseMaterial.Brush>
+                                                <VisualBrush>
+                                                    <VisualBrush.Visual>
+                                                        <TextBlock Name="ScrollText" Foreground="Yellow" FontFamily="Consolas" TextAlignment="Center" />
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </DiffuseMaterial.Brush>
+                                        </DiffuseMaterial>
+                                    </GeometryModel3D.Material>
+                                </GeometryModel3D>
+                            </Model3DGroup.Children>
+                        </Model3DGroup>
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+            </Viewport3D>
+        </Grid>
+
     </Grid>
 </dialogs:CustomDialog>

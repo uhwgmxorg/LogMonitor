@@ -11,6 +11,8 @@ using System.Windows;
 using System.Windows.Controls;
 using WpfFileDialogs;
 using System.Linq;
+using LogMonitor.Tools;
+using System.IO;
 
 namespace LogMonitor
 {
@@ -22,6 +24,9 @@ namespace LogMonitor
         public event PropertyChangedEventHandler PropertyChanged;
 
         private UCAboutBox _aboutDlg = new UCAboutBox();
+        private UCChangeLog _changeLogDlg = new UCChangeLog();
+        private UCListOfKnownBugs _lOKBDlg = new UCListOfKnownBugs();
+
         private ObservableCollection<DragDockPanel> _panels = new ObservableCollection<DragDockPanel>();
         private OpenFileDlgWindow _openFileDlgWindow;
 
@@ -48,7 +53,9 @@ namespace LogMonitor
             DragDockPanelHostWithItemTemplate.ItemsSource = _panels;
             DragDockPanelHostWithItemTemplate.MinimizedPosition = MinimizedPositions.Right;
 
-            _aboutDlg.Close_Button.Click += CloseDialog;
+            _aboutDlg.Close_Button.Click += CloseAboutDialog;
+            _changeLogDlg.Close_Button.Click += CloseChangeLogDialog;
+            _lOKBDlg.Close_Button.Click += CloseLOKBDialog;
 
             _openFileDlgWindow = new OpenFileDlgWindow();
             _openFileDlgWindow.Closed += (o, args) => _openFileDlgWindow.Hide();
@@ -93,11 +100,13 @@ namespace LogMonitor
         /// <param name="e"></param>
         private void Button_Click_About(object sender, RoutedEventArgs e)
         {
-            ShowDialog();
+            ShowDialogAbout();
         }
-        private new void ShowDialog()
+        private void ShowDialogAbout()
         {
             DialogManager.ShowMetroDialogAsync(this, _aboutDlg);
+            // Move the Dlg a bit to the left
+            _aboutDlg.Margin = new Thickness(-280, _aboutDlg.Margin.Top, _aboutDlg.Margin.Right, _aboutDlg.Margin.Bottom);
         }
 
         #endregion
@@ -120,6 +129,50 @@ namespace LogMonitor
             RemovePannel(Convert.ToInt32(panelNo));
         }
 
+        /// <summary>
+        /// Label_ChangeLogMouseDown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContextMenuItemChangeLog_Click(object sender, RoutedEventArgs e)
+        {
+            ShowDialogChangeLog();
+        }
+        private void ShowDialogChangeLog()
+        {
+            DialogManager.ShowMetroDialogAsync(this, _changeLogDlg);
+        }
+
+        /// <summary>
+        /// ContextMenuItemLOKB_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContextMenuItemLOKB_Click(object sender, RoutedEventArgs e)
+        {
+            ShowDialogLOKB();
+        }
+        private void ShowDialogLOKB()
+        {
+            DialogManager.ShowMetroDialogAsync(this, _lOKBDlg);
+        }
+
+        /// <summary>
+        /// ContextMenuItemLookForUpdates_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContextMenuItemLookForUpdates_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateTheApplication();
+        }
+        private void UpdateTheApplication()
+        {
+            string mypath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            string filename = Path.Combine(mypath, "GUP.exe");
+            var proc = System.Diagnostics.Process.Start(filename, "");
+        }
+
         #endregion
         /******************************/
         /*      Other Events          */
@@ -136,9 +189,9 @@ namespace LogMonitor
             // Set Window Title
             string Version;
 #if DEBUG
-            Version = "    Debug Version " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            Version = "    Debug Version " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + " Rev " + Globals._revision;
 #else
-            Version = "    Release Version " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            Version = "    Release Version " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + " Rev " + Globals._revision;
 #endif
             Title += Version;
         }
@@ -168,11 +221,30 @@ namespace LogMonitor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void CloseDialog(object sender, RoutedEventArgs e)
+        private async void CloseAboutDialog(object sender, RoutedEventArgs e)
         {
             await this.HideMetroDialogAsync(_aboutDlg);
         }
-
+        
+        /// <summary>
+        /// CloseChangeLogDialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void CloseChangeLogDialog(object sender, RoutedEventArgs e)
+        {
+            await this.HideMetroDialogAsync(_changeLogDlg);
+        }
+        
+        /// <summary>
+        /// CloseLOKBDialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void CloseLOKBDialog(object sender, RoutedEventArgs e)
+        {
+            await this.HideMetroDialogAsync(_lOKBDlg);
+        }
         /// <summary>
         /// MetroWindow_Closing
         /// </summary>

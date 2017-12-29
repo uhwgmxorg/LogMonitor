@@ -63,11 +63,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialogs\UCChangeLog.xaml.cs">
+      <DependentUpon>UCChangeLog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\UCListOfKnownBugs.xaml.cs">
+      <DependentUpon>UCListOfKnownBugs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Globals.cs" />
     <Compile Include="Tools\WindowsSettings.cs" />
     <Compile Include="Views\UCLogListBox.xaml.cs">
       <DependentUpon>UCLogListBox.xaml</DependentUpon>
     </Compile>
     <Page Include="Dialogs\UCAboutBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\UCChangeLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\UCListOfKnownBugs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,6 +132,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="LICENSE">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -152,6 +170,13 @@
   <ItemGroup>
     <Resource Include="Resources\LogMon.bmp" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ChangeLog.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ListOfKnownBugs.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
