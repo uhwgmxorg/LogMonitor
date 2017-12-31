@@ -20,6 +20,9 @@ namespace WpfFileDialogs
         {
             try
             {
+                if (!HasWriteAccessToFolder(Path.GetDirectoryName(".\\")))
+                    file = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName + "\\" + file;
+
                 XmlSerializer xs = new XmlSerializer(typeof(T));
                 using (StreamWriter wr = new StreamWriter(file))
                 {
@@ -42,8 +45,10 @@ namespace WpfFileDialogs
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(T));
+                if (!HasWriteAccessToFolder(Path.GetDirectoryName(".\\")))
+                    file = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName + "\\" + file;
 
+                XmlSerializer serializer = new XmlSerializer(typeof(T));
                 using (StreamReader rd = new StreamReader(file))
                 {
                     var Obj = serializer.Deserialize(rd);
@@ -69,9 +74,11 @@ namespace WpfFileDialogs
 
             try
             {
-                XmlSerializer xs = new XmlSerializer(typeof(List<T>));
-                //XmlSerializer xs = XmlSerializer.FromTypes(new[] { typeof(List<T>) })[0]; // Keine Warning aber ACHTUNG Memory Leak 
+                if (!HasWriteAccessToFolder(Path.GetDirectoryName(".\\")))
+                    file = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName + "\\" + file;
 
+                XmlSerializer xs = new XmlSerializer(typeof(List<T>));
+                //XmlSerializer xs = XmlSerializer.FromTypes(new[] { typeof(List<T>) })[0]; // No warning but ATTENTION that generates Memory Leak
                 using (StreamReader rd = new StreamReader(file))
                 {
                     list = xs.Deserialize(rd) as List<T>;
@@ -94,8 +101,11 @@ namespace WpfFileDialogs
         {
             try
             {
+                if (!HasWriteAccessToFolder(Path.GetDirectoryName(".\\")))
+                    file = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName + "\\" + file;
+
                 XmlSerializer xs = new XmlSerializer(typeof(List<T>));
-                //XmlSerializer xs = XmlSerializer.FromTypes(new[] { typeof(List<T>) })[0]; // No warning but ATTENTION Memory Leak
+                //XmlSerializer xs = XmlSerializer.FromTypes(new[] { typeof(List<T>) })[0]; // No warning but ATTENTION that generates Memory Leak
                 using (StreamWriter wr = new StreamWriter(file))
                 {
                     xs.Serialize(wr, list);
@@ -155,6 +165,26 @@ namespace WpfFileDialogs
             foreach (var item in llist)
                 oc.Add(item);
             return oc;
+        }
+
+        /// <summary>
+        /// HasWriteAccessToFolder
+        /// </summary>
+        /// <param name="folderPath"></param>
+        /// <returns></returns>
+        static public bool HasWriteAccessToFolder(string folderPath)
+        {
+            // For the moment, store the data in the user directory
+            return false;
+            try
+            {
+                System.Security.AccessControl.DirectorySecurity ds = Directory.GetAccessControl(folderPath);
+                return true;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return false;
+            }
         }
     }
 }
