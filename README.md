@@ -7,7 +7,7 @@ It doesn't have many functions yet and is actually more than a show case, but it
 
 ![img](https://github.com/uhwgmxorg/LogMonitor/blob/master/Doc/LogMinGifAnimation12.gif)
 
-You can find its Homepage [here](http://uhwgmxorg.com/LogMonitor/)
+You can find the homepage of the software [here](http://uhwgmxorg.com/LogMonitor/)
 
 By the way, the cool gif animation comes from [NickeManarin](https://github.com/NickeManarin/ScreenToGif)
 
