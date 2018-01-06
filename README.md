@@ -1,7 +1,7 @@
 # LogMonitor
 LogMonitor is a small and tiny open source software to monitor Log Files.
 
-![img](https://github.com/uhwgmxorg/LogMonitor/blob/master/Doc/logmon010.jpg)
+![img](https://github.com/uhwgmxorg/LogMonitor/blob/master/Doc/LogMinGifAnimation11.gif)
 
 It doesn't have many functions yet and is actually more than a show case, but it does its purpose.
 
