@@ -9,4 +9,4 @@ It doesn't have many functions yet and is actually more than a show case, but it
 
 You can find its Homepage [here](http://uhwgmxorg.com/LogMonitor/)
 
-A **Setup** is also available [here](http://uhwgmxorg.com/Setup_LogMonitor_1_3_0_0.zip?dl=0) NOTE: Both the LogMonitor.exe and the Setup*.exe is not signed.
+A **Setup** is also available [here](http://uhwgmxorg.com/Setup_LogMonitor_1_4_0_0.zip?dl=0) NOTE: Both the LogMonitor.exe and the Setup*.exe is not signed.
