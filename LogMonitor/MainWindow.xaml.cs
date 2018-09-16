@@ -23,6 +23,8 @@ namespace LogMonitor
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+
         private UCAboutBox _aboutDlg = new UCAboutBox();
         private UCChangeLog _changeLogDlg = new UCChangeLog();
         private UCListOfKnownBugs _lOKBDlg = new UCListOfKnownBugs();
@@ -252,6 +254,7 @@ namespace LogMonitor
         /// <param name="e"></param>
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            _logger.Info("Closing LogMonitor");
             Application.Current.Shutdown();
         }
 

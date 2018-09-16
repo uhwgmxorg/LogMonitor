@@ -1,17 +1,27 @@
 Program LogMonitor ChangeLog
 
 
+   24.08.2018 1.5.0.0 Rev 0
+
+    - Add NLog
+    - Fix a bug in UCLogListBox 
+    - Set the OK Button to default button in 
+      OpenFileDlgWindow.
+
+
    30.12.2017 1.4.0.0 Rev 0
 
-	- Save the data file loaded history in 
+    - Save the data file loaded history in 
       WpfFileDialogs in the user directory
 
 
    29.12.2017 1.3.0.0 Rev 0
 
-	- Bug in Label_ChangeLogMouseDown
+    - Bug in Label_ChangeLogMouseDown
+
 
    28.12.2017 1.2.0.0 Rev 0
+
 
    - Fix bug in update mechanism 
 

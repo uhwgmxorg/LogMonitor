@@ -1,6 +1,6 @@
 ﻿Program LogMonitor ListOfKnownBugs
 
 
-    30.12.2017 1.4.0.0 Rev 0
+    24.08.2018 1.5.0.0 Rev 0
 
    - No errors known at the moment

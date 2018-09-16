@@ -23,6 +23,8 @@ namespace LogMonitor.Views
 
         private const int MAX_MESSGAES = 200;
 
+        private NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+
         private object _lockObj = new object();
         private int _counter = 0;
         private FileSystemWatcher _watcher;
@@ -97,7 +99,7 @@ namespace LogMonitor.Views
         {
             _startLineTotal = GetTotalLinesInFile(LongFileName,ref _lastFileSize);
             // Estimate the position of the last 200 lines
-            try { _lastFileSize = _lastFileSize - (_lastFileSize / _startLineTotal * MAX_MESSGAES); } catch (Exception) { }
+            try { _lastFileSize = _lastFileSize - (_lastFileSize / _startLineTotal * MAX_MESSGAES); } catch (Exception) { _lastFileSize = 0; } if (_lastFileSize < 0) _lastFileSize = 0;
             WatchLogFile(LongFileName);
             StopWatching = false;
             Task.Factory.StartNew(() =>
@@ -180,11 +182,12 @@ namespace LogMonitor.Views
         /// </summary>
         private void WatchLogFile(string fileName)
         {
-            int count = 0;
+            int count = 1;
+            int trys = 5;
             long newLength = 0;
             string newFileLines = "";
             bool success = false;
-            while (count < 5 && !success && !StopWatching)
+            while (count <= trys && !success && !StopWatching)
             {
                 try
                 {
@@ -217,6 +220,7 @@ namespace LogMonitor.Views
                     Debug.WriteLine(ex.ToString());
                     Thread.Sleep(50);
                 }
+                Debug.WriteLine("count={0}",count);
                 ++count;
             }
         }
@@ -248,14 +252,25 @@ namespace LogMonitor.Views
             MessageList.Clear();
         }
 
+
         /// <summary>
-        /// OnPropertyChanged
+        /// SetField
         /// </summary>
-        /// <param name="p"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="field"></param>
+        /// <param name="value"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        protected bool SetField<T>(ref T field, T value, string propertyName)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
         private void OnPropertyChanged(string p)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(p));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(p));
         }
         #endregion
     }

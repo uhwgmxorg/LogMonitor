@@ -176,6 +176,7 @@ namespace WpfFileDialogs
         {
             // For the moment, store the data in the user directory
             return false;
+#pragma warning disable 162
             try
             {
                 System.Security.AccessControl.DirectorySecurity ds = Directory.GetAccessControl(folderPath);
@@ -185,6 +186,7 @@ namespace WpfFileDialogs
             {
                 return false;
             }
+#pragma warning restore 162
         }
     }
 }

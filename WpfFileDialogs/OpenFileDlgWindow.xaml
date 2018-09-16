@@ -15,7 +15,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid Margin="10,10,10,75">
-            <TreeView x:Name="fileSystemTreeView" local:LazyTreeViewExtension.IsLazyLoading="True" SelectedItemChanged="FileSystemTreeView_SelectedItemChanged" >
+            <TreeView x:Name="fileSystemTreeView" local:LazyTreeViewExtension.IsLazyLoading="True" SelectedItemChanged="FileSystemTreeView_SelectedItemChanged" TabIndex="7" >
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource ="{Binding Path=SubItems}">
                         <TextBlock Text="{Binding Path=ShortName}"/>
@@ -23,7 +23,7 @@
                 </TreeView.ItemTemplate>
             </TreeView>
         </Grid>
-        <ComboBox SelectedItem="{Binding SelectedFile}" ItemsSource="{Binding FileList}" ToolTip="{Binding LongFileNameToolTip}" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0" IsReadOnly="True" Margin="10,0,170,41" Height="29" VerticalAlignment="Bottom" SelectionChanged="ComboBox_SelectionChangedFiles">
+        <ComboBox SelectedItem="{Binding SelectedFile}" ItemsSource="{Binding FileList}" ToolTip="{Binding LongFileNameToolTip}" ToolTipService.ShowDuration="90000" ToolTipService.BetweenShowDelay="0" IsReadOnly="True" Margin="10,0,170,41" Height="29" VerticalAlignment="Bottom" SelectionChanged="ComboBox_SelectionChangedFiles" TabIndex="5">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -32,11 +32,11 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Content="Clear" HorizontalAlignment="Right" Margin="0,0,90,42" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Clear"/>
-        <Button Content="Refresh" HorizontalAlignment="Right" Margin="0,0,10,42" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Refresh"/>
-        <Button Content="Cancel" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Cancel"/>
-        <Button Content="Ok" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Ok"/>
-        <ComboBox SelectedItem="{Binding SelectedFilter}"  ItemsSource="{Binding FilterList}" SelectedIndex="0" IsReadOnly="True" Margin="10,0,170,10"  VerticalAlignment="Bottom" SelectionChanged="ComboBox_SelectionChangedFilter" >
+        <Button Content="Clear" HorizontalAlignment="Right" Margin="0,0,90,42" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Clear" TabIndex="4"/>
+        <Button Content="Refresh" HorizontalAlignment="Right" Margin="0,0,10,42" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Refresh" TabIndex="3"/>
+        <Button Content="Cancel" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Cancel" TabIndex="2"/>
+        <Button Name="ButtonOk" Content="Ok" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click_Ok" TabIndex="1"/>
+        <ComboBox SelectedItem="{Binding SelectedFilter}"  ItemsSource="{Binding FilterList}" SelectedIndex="0" IsReadOnly="True" Margin="10,0,170,10"  VerticalAlignment="Bottom" SelectionChanged="ComboBox_SelectionChangedFilter" TabIndex="6" >
         </ComboBox>
     </Grid>
 </mahapps:MetroWindow>

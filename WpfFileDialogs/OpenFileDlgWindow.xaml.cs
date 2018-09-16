@@ -155,6 +155,7 @@ namespace WpfFileDialogs
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            ButtonOk.Focus();
             LoadFileList();
         }
 
