@@ -11,4 +11,4 @@ You can find the homepage of the software [here](http://uhwgmxorg.com/LogMonitor
 
 By the way, the cool gif animation comes from [NickeManarin](https://github.com/NickeManarin/ScreenToGif)
 
-A **Setup** is also available [here](http://uhwgmxorg.com/Setup_LogMonitor_1_4_0_0.zip?dl=0) NOTE: Both the LogMonitor.exe and the Setup*.exe is not signed.
+A **Setup** is also available [here](http://uhwgmxorg.com/LogMonitor/Download/1.7/Setup_LogMonitor_1_7_0_0.exe) NOTE: LogMonitor.exe and the Setup*.exe is signed now.
